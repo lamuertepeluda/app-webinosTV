@@ -1,10 +1,449 @@
-// The following two lines import the default Sencha Touch theme. If you are building
-// a new theme, remove them and the add your own CSS on top of the base CSS (which
-// is already included in your app.json file).
+$bg-color: #333;//#337; //background color
+$fg-color:#ddd; //foreground color
+$sel-color:#006bb6; //selected items color
+$csel-color:complement($sel-color); //complementary of selected items color
+$hl-color:lighten($sel-color, 15%); //highlight or pressed color
+
+//List variables
+$list-zebrastripe:true;
+$list-bg-color:$bg-color;
+$list-color:$fg-color;
+$list-active-color:$sel-color;
+$list-pressed-color:$hl-color;
+
+//See http://docs.sencha.com/touch/2-1/#!/api/Global_CSS
+$base-color:lighten($bg-color,20%);
+$active-color:$sel-color;
+$alert-color :$hl-color;
+$font-family:texgyreadventor;
+
 @import 'sencha-touch/default';
 @import 'sencha-touch/default/all';
 
-// Custom code goes here..
 
-// Examples of using the icon mixin:
-// @include icon('user');
+body {
+  font-size: 22px;
+}
+
+//@include sencha-list();
+/*@include sencha-msgbox();*/
+/**
+ * carbon theme http://lea.verou.me/css3patterns/#carbon
+ */
+@mixin background-carbon(
+    $background-color: $background-carbon-base-color,
+    $dot-size: 5px
+) {
+    @include background(
+      -webkit-linear-gradient(27deg, $background-color+#020202 $dot-size, rgba(#fff, 0) $dot-size) 0 $dot-size,
+      -webkit-linear-gradient(207deg, $background-color+#020202 $dot-size, rgba(#fff, 0) $dot-size) 2*$dot-size 0px,
+      -webkit-linear-gradient(27deg,  $background-color+#0F0F0F $dot-size, rgba(#fff, 0) $dot-size) 0px $dot-size,
+      -webkit-linear-gradient(207deg, $background-color+#0F0F0F $dot-size, rgba(#fff, 0) $dot-size) 2*$dot-size $dot-size,
+      -webkit-linear-gradient(90deg, $background-color+#080808 2*$dot-size, rgba(#fff, 0) 2*$dot-size),
+      -webkit-linear-gradient($background-color+#0A0A0A 25%, $background-color+#070707 25%, $background-color+#070707 50%, rgba(#fff, 0) 50%, rgba(#fff, 0) 75%, $background-color+#111111 75%, $background-color+#111111)
+    );
+
+    background-repeat: repeat;
+    background-color: $background-color;
+    background-size: (4*$dot-size) (4*$dot-size);
+}
+
+.main-container{
+/*   background-color: darken($base-color,50%); */
+/*   @include background-carbon(darken($base-color,50%),5px); */
+  $background-carbon-fiber-base-color:darken($base-color,30%);
+  @include background-carbon-fiber($background-carbon-fiber-base-color,$dot-color: scale-lightness($background-carbon-fiber-base-color, -50),
+  $highlight-color: rgba($highlight_color, .1),
+  $spacing-size: 12px,
+  $dot-size: 1.5px);
+}
+
+.title-container{
+  background-color: #000;
+  font-size: 1.15em;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+div.nav-selected, div.x-container .x-unsized .x-dataview{
+  border: 0.25em solid $csel-color;
+}
+
+.selected-column-header{
+  color:lighten($hl-color,20%);
+  text-shadow: 0 0 20px white;
+}
+
+//used in phone UI when next component is not available
+.nextcoldisabledmask{
+  $bordercolor: lighten($csel-color,25%);
+  text-align: center;
+  font-size: 2.2em;
+  background-color: transparent;
+  color: rgba($bordercolor,0.5);
+  border-color: $bordercolor;
+  box-shadow: inset 0 0 1em $bordercolor;
+  -webkit-box-shadow: inset 0 0 1em $bordercolor;
+  border-width: 0em;
+  border-style: solid;
+}
+
+@include sencha-button-ui('tile', $bg-color/*, 'glossy'*/);
+
+
+//csc = complementary of selection color
+@include sencha-carousel-indicator-ui('csc-indicator',$csel-color,'glossy',lighten($csel-color,30%),'glossy');
+//blue indicator
+@include sencha-carousel-indicator-ui('blue-indicator',$sel-color,'glossy',lighten($sel-color,30%),'glossy');
+
+//Scroll indicator for the phone UI
+.phone-listview-indicator{
+  .x-scroll-indicator{
+    background-color:$csel-color;
+  }
+}
+
+//Playlist unselected item container
+.playlist{
+  max-width:100%;
+}
+
+//act ctrl
+.actionslist div.x-scroll-scroller {
+  height: 100% !important;
+}
+
+.playlist div .x-dataview{
+  $bg-inner-color:darken($bg-color,15%);
+  border-top: 0.25em solid $bg-inner-color;
+  background-color:$bg-inner-color;
+  margin: 0.15em;
+}
+
+.playlist div{
+  max-width:100%;
+}
+
+.playlist-disclosure{
+  background-color:darken($bg-color,5%);
+  color:darken($fg-color,10%);;
+  text-align:center;
+}
+
+.playlist-item{
+  text-align:left;
+  font-size:0.75em;
+  margin: 0.25em;
+  color:$fg-color;
+  white-space:nowrap;
+}
+
+.playlist-item{
+  @include background-gradient($bg-color);
+}
+
+.playlist-item:nth-child(odd){
+  @include background-gradient(darken($bg-color,10%));
+}
+
+.playlist-item:nth-child(even){
+  @include background-gradient($bg-color);
+}
+
+.playlist-item-pressed{
+  @include background-gradient($hl-color);
+}
+
+.playlist-item-pressed:nth-child(even){
+  @include background-gradient($hl-color);
+}
+
+.playlist-item-pressed:nth-child(odd){
+  @include background-gradient($hl-color);
+}
+
+.playlist-item-selected{
+  @include background-gradient($sel-color);
+}
+
+.playlist-item-selected:nth-child(even){
+  @include background-gradient($sel-color);
+}
+
+.playlist-item-selected:nth-child(odd){
+  @include background-gradient($sel-color);
+}
+
+.videoplayermask{
+  background-color:darken($bg-color,10%);
+  opacity:0.8;
+/*  -webkit-box-reflect: below 0
+   -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0.5, transparent), to(blue)); */
+}
+
+.videobox
+{
+  margin:0.25em;
+  border:0.25em solid darken($base-color,35%);
+  $background-carbon-fiber-base-color:darken($base-color,45%);
+  @include background-carbon-fiber($background-carbon-fiber-base-color,$dot-color: scale-lightness($background-carbon-fiber-base-color, -50),
+  $highlight-color: rgba($highlight_color, .1),
+  $spacing-size: 12px,
+  $dot-size: 1.5px);
+}
+
+$tile-margin-unit:0.05em;
+
+//Basic Tile class, much like an abstract class
+.default-tile,.tile-panel,.tile-panel-selected,.tile-panel-pressed,.multi-tile-panel{
+  text-align:center;
+  font-size:0.85em;
+  color:$fg-color;
+  margin: $tile-margin-unit;
+  /*padding: 4*$tile-margin-unit 0 4*$tile-margin-unit 0;*/
+}
+
+
+//Tile unselected
+.tile-panel{
+  @include background-gradient($bg-color);
+}
+
+//Tile selected
+.tile-panel-selected{
+  @include background-gradient($sel-color);
+}
+
+//Tile pressed
+.tile-panel-pressed{
+  @include background-gradient($hl-color);
+}
+
+//Tile text
+.tile-text{
+  overflow-x:hidden;
+  /*margin: 0.5em 0em 0.5em 0em;*/
+  margin: $tile-margin-unit 0 $tile-margin-unit 0;
+}
+
+//Panel with multiple panels inside
+.multi-tile-panel,.multi-tile-panel-selected,.multi-tile-panel-pressed{
+  color:transparent;
+  border: 0px;
+  margin: $tile-margin-unit;
+  padding: 0px;
+}
+
+div.multi-tile-panel div.tile-panel{
+  margin: 0px;
+  /*padding: 4*$tile-margin-unit 0 4*$tile-margin-unit 0;*/
+}
+
+div.multi-tile-panel div.tile-panel:first-child{
+  margin:0 2*$tile-margin-unit 0 0;
+}
+
+div.multi-tile-panel-selected div.tile-panel{
+  @include background-gradient($sel-color);
+}
+
+div.multi-tile-panel-pressed div.tile-panel{
+  background-color:$hl-color;
+}
+
+.actionslist{
+  .x-inner, .x-body {
+    .x-unsized{
+      height:100%;
+    }
+  }
+}
+//Tile icons
+.default-tile-icon,.tile-icon-play,.tile-icon-queue,.tile-icon-favorites,.tile-icon-webinos,.tile-icon-pc,.tile-icon-list,.tile-icon-phone,.tile-icon-tablet,.tile-icon-tv,.tile-icon-laptop,.tile-icon-video,.tile-icon-image,.tile-icon-audio,.tile-icon-doc,.tile-icon-tvchannel
+{
+  display:block;
+  margin: auto 3*$tile-margin-unit auto 3*$tile-margin-unit;//auto 1.5em auto 1.5em;
+  -webkit-mask-size: 2.5em;//40px;
+  -webkit-mask-position:0 0;
+  -webkit-mask-repeat: no-repeat;
+  background-image: none;
+  background-color:$fg-color;
+  width:2.5em;//40px;
+  height:2.5em;//40px;
+  padding:0.5em;
+  -webkit-transform: translate3d(0px, 0px, 0px);
+}
+
+.tile-icon-play{
+  -webkit-mask-image: inline-image('svg/play_on.svg');
+}
+
+.tile-icon-queue{
+  -webkit-mask-image: inline-image('svg/add_queue.svg');
+  -webkit-mask-size: 2em;//32px;
+  width:2em;
+  height:2em;
+}
+
+.tile-icon-favorites{
+  -webkit-mask-image: inline-image('favorites.png');
+}
+
+.tile-icon-webinos{
+  -webkit-mask-image: inline-image('svg/apps.svg');
+}
+
+.tile-icon-pc{
+  -webkit-mask-image: inline-image('svg/pc.svg');
+}
+
+.tile-icon-list{
+  margin: auto 10*$tile-margin-unit auto 10*$tile-margin-unit;
+  -webkit-mask-image: inline-image('svg/queue.svg');
+}
+
+.tile-icon-tvchannel{
+  -webkit-mask-image: inline-image('svg/tv_channels.svg');
+}
+
+.tile-icon-phone{
+  -webkit-mask-image: inline-image('svg/phone.svg');
+}
+
+.tile-icon-tablet{
+  -webkit-mask-image: inline-image('svg/tablet.svg');
+}
+
+.tile-icon-tv{
+  -webkit-mask-image: inline-image('svg/tv.svg');
+}
+
+.tile-icon-laptop{
+  -webkit-mask-image: inline-image('svg/laptop.svg');
+}
+
+.tile-icon-audio{
+  -webkit-mask-image: inline-image('svg/music.svg');
+}
+
+.tile-icon-video{
+  -webkit-mask-image: inline-image('svg/movie.svg');
+}
+
+.tile-icon-image{
+  -webkit-mask-image: inline-image('svg/image.svg');
+}
+
+.tile-icon-doc{
+  -webkit-mask-image: inline-image('svg/folder.svg');
+}
+
+//Sliding text
+.sliding-text{
+  /* W3C  */
+  overflow-x: marquee-line;
+  marquee-direction: forward;
+  marquee-style: scroll;
+  marquee-speed: normal;
+  marquee-play-count: infinite;
+  /* Safari and Chrome  */
+  overflow-x:-webkit-marquee;
+  -webkit-marquee-direction: backwards;
+  -webkit-marquee-style: scroll;
+  -webkit-marquee-speed: normal;
+  -webkit-marquee-increment: 1%;
+  -webkit-marquee-repetition: infinite;
+}
+
+
+//For labels of not yet implemented features
+.not-implemented-yet {
+
+}
+@-webkit-keyframes rotateAndScale {
+  0% {
+    -webkit-transform:scale(1.0) rotate(0deg);
+  }
+
+  60% {
+    -webkit-transform:scale(2.5) rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform:scale(1.0) rotate(360deg);
+  }
+}
+
+
+//BrowserView reduce/restore
+$scaleFactor:0.7;
+$offset:15%;
+$time:0.5s;
+.reduce-size{
+  top:$offset;
+  left:-$offset;
+  transform:scale($scaleFactor,$scaleFactor) translateZ(0); /* Safari and Chrome */
+  -webkit-transform:scale($scaleFactor,$scaleFactor) translateZ(0); /* Safari and Chrome */
+}
+
+.restore-size{
+/*  top:0;
+  left:0;*/
+  transform:scale(1.0,1.0) translateZ(0); /* Safari and Chrome */
+  -webkit-transform:scale(1.0,1.0) translateZ(0); /* Safari and Chrome */
+}
+
+//reduce with transition: still some issues on some devices
+.reduce-size-wtransition
+{
+/*  top:$offset;
+  left:-$offset;*/
+  transform:scale($scaleFactor,$scaleFactor);
+  -webkit-transform:scale($scaleFactor,$scaleFactor) translateZ(0); /* Safari and Chrome */
+  -webkit-animation-name: reduceSize;
+  -webkit-animation-duration: $time;
+  -webkit-animation-delay: 0s; //important! makes the text start from 0
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-iteration-count: 1;
+}
+
+@-webkit-keyframes reduceSize {
+  0% {
+/*    top:0;
+    left:0;*/
+    -webkit-transform:scale(1.0) translateZ(0);
+  }
+
+  100% {
+/*    top:$offset;
+    left:-$offset;*/
+    -webkit-transform:scale($scaleFactor,$scaleFactor) translateZ(0);
+  }
+}
+
+.restore-size-wtransition
+{
+/*  top:0;
+  left:0;*/
+  transform:scale(1.0,1.0);
+  -webkit-transform:scale(1.0,1.0) translateZ(0); /* Safari and Chrome */
+  -webkit-animation-name: restoreSize;
+  -webkit-animation-duration: $time;
+  -webkit-animation-delay: 0s; //important! makes the text start from 0
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-iteration-count: 1;
+}
+
+@-webkit-keyframes restoreSize {
+  0% {
+/*    top:$offset;
+    left:-$offset;*/
+    -webkit-transform:scale($scaleFactor,$scaleFactor) translateZ(0);;
+  }
+
+  100% {
+/*    top:0;
+    left:0;*/
+    -webkit-transform:scale(1.0,1.0) translateZ(0);
+  }
+}

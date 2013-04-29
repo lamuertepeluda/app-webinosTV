@@ -24,10 +24,38 @@ Ext.Loader.setPath({
 Ext.application({
   name: 'webinosTV',
   requires: [
-    'Ext.MessageBox'
+    'Ext.MessageBox',
+    'integration.Ui',
+    'integration.EventsConnector',
+    'integration.PZPConnector'
+  ],
+  models: [
+    'AudioMedia',
+    'Category',
+    'Device',
+    'Media',
+    'VideoMedia'
   ],
   views: [
-    'Main'
+    'ActionControlDataViewItem',
+    'ActionControlsColumn',
+    'AudioMPListItem',
+    'CategoriesColumn',
+    'ColumnView',
+    'CustomSegmentedButton',
+    'DefaultTilePanel',
+    'MediaCategoryDataViewItem',
+    'MediaPlaylist',
+    'MediaSelectionColumn',
+    'MediaWrapper',
+    'MPListItem',
+    'SourceDeviceDataViewItem',
+    'SourceDevicesColumn',
+    'SourceDevicesDataView',
+    'TargetDeviceDataViewItem',
+    'TargetDevicesColumn',
+    'TilesDataView',
+    'VideoMPListItem'
   ],
   icon: {
     '57': 'resources/icons/Icon.png',
@@ -45,21 +73,130 @@ Ext.application({
     '1496x2048': 'resources/startup/1496x2048.png'
   },
   launch: function() {
-    // Destroy the #appLoadingIndicator element
-    Ext.fly('appLoadingIndicator').destroy();
+    Ext.Viewport.on('resize', 'handleResize', this, {buffer: 50});
+    //ADD THIS Utility to Store prototype and its derived classes
+    /**
+     * Query items by using a pseudo querystring
+     * that is attribute1=value1&attribute2=value2...
+     * but value can include spaces and is not urlencoded
+     * @param {string} querystring the query string
+     * @return {Array} items array of records
+     **/
+    Ext.data.Store.prototype.queryByString = function(querystring) {
+      var store = this;
+      var queryconditions = querystring.split("&");
+      var queryObject = {};
+      for (var i = 0; i < queryconditions.length; i++) {
+        var qc = queryconditions[i].split("=");
+        queryObject[qc[0]] = qc[1];
+      }
+      var validFields = store.getModel().getFields().keys;
+      var qresult = store.queryBy(function(record, id) {
+        var condition = true;
+        for (var key in queryObject) {
+          if (validFields.indexOf(key) !== -1)
+            condition = condition && queryObject[key] === record.get(key);
+        }
+        return condition;
+      });
+      return qresult.items;
+    };
+    // Initialize the stores
+    //Unified device store (both source and target)
+    webinosTV.app.devicesStore = Ext.create('webinosTV.store.DevicesStore', {
+      storeId: 'devicesstore-id',
+      listeners: {
+        load: function(store) {
+//console.warn("Devices store loaded: - storeId = ", webinosTV.app.devicesStore.getStoreId(), "; id = ", webinosTV.app.devicesStore.getId());
 
-    // Initialize the main view
-    Ext.Viewport.add(Ext.create('webinosTV.view.Main'));
-  },
-  onUpdated: function() {
-    Ext.Msg.confirm(
-      "Application Update",
-      "This application has just successfully been updated to the latest version. Reload now?",
-      function(buttonId) {
-        if (buttonId === 'yes') {
-          window.location.reload();
+//Unified media store
+//Currently only 6 media types/categories/groups: 'audio','video' 'image', 'tvchannel', 'app', 'doc'
+//Plus one collection: 'album' (that should work also as playlist, but we could split those role in the future)
+          webinosTV.app.mediaStore = Ext.create('webinosTV.store.MediaStore', {
+            groupStores: [
+              'audio',
+              'video',
+              'images',
+              'tvchannel',
+              'app',
+              'doc'
+            ],
+            storeId: 'mediastore-id',
+            listeners: {
+              load: function(store) {
+//console.warn("General Media store loaded: - storeId = ", webinosTV.app.mediaStore.getStoreId(), "; id = ", webinosTV.app.mediaStore.getId());
+//load substores
+                webinosTV.app.mediaStore.loadGroupStores();
+                // Initialize the main view, which was instantiated in the profile
+                var bw = Ext.getCmp('browserMainView');
+                //load main view components (which will search for the stores)
+                bw.addAllColumns(
+                  function() {
+                    //connect webinos platform
+                    webinosTV.app.connectUi = Ext.create('integration.Ui');
+                    webinosTV.app.connectEvents = Ext.create('integration.EventsConnector'); //run_events_connect();
+                    webinosTV.app.connectConnector = Ext.create('integration.PZPConnector'); //run_connector_connect();
+                  }
+                );
+                // Destroy the #appLoadingIndicator element
+                Ext.fly('appLoadingIndicator').destroy();
+                //show the main view
+                Ext.Viewport.add(bw);
+              }
+            }
+          });
+          //load media store (this triggers its 'load' listener)
+          webinosTV.app.mediaStore.load();
         }
       }
-    );
+    });
+    //load devices store (this triggers all the above)
+    webinosTV.app.devicesStore.load();
+  },
+  profiles: [
+    'Phone',
+    'LargeScreen'
+  ],
+  stores: [
+    'DeviceQueueMediaStore',
+    'DevicesStore',
+    'GenericMediaSubStore',
+    'MediaGroupStore',
+    'MediaStore'
+  ],
+  controllers: [
+    'BrowserViewController',
+    'SelectCategoryController',
+    'SelectMediaController',
+    'SelectPlayModeController',
+    'SelectTargetDeviceController'
+  ],
+  viewport: {
+    autoMaximize: false,
+    top: 0,
+    left: 0,
+    layout: 'float',
+    width: '100%',
+    height: '100%'
+  },
+  //connect interface with ui
+  connectUi: null,
+  //connect interface with events
+  connectEvents: null,
+  //connect interface with PZP
+  connectConnector: null,
+  devicesStore: null,
+  mediaStore: null,
+  handleResize: function() {
+//    //handle font resize here
+    var body = document.getElementsByTagName('body')[0];
+    var baseSizePx = parseFloat(getComputedStyle(body).fontSize);
+    var ratio = webinosTV.app.getCurrentProfile().getRatio(); //computed by hand: body font-size/document clientWidth on my PC
+
+    var w = document.documentElement.clientWidth;
+    var newsize = ratio * w;
+    //  console.log('webinosTV.app ~ handleResize', newsize, baseSizePx);
+    body.style.fontSize = newsize + 'px';
   }
+
 });

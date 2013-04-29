@@ -14,6 +14,9 @@
     },
     "app.json.tpl.merge": {
       "8d16c615fb2f1cb40ed794158d6ac3192a168b97": "eJzFWFtv00gUfu+vGEUrAVUaP+1LtSB1SxHdLQWRon0AHib2cTwwnjFzSRpV+e/7zfgSO2kLKYhaquxmPOd+vu+Mbw4YruTwMN7ZIbsqiPGqkiLlTmj1xDLFS7IVT2nMvKWMzVZsSiotODvVZclVxpxmc1JkuCOWSm4t2UZcEu+jIGJ0zEY34WE9Gh/cpjUXkljFXRHkuULYLTtyo5Vjr6/eXLBMp74k5cbMkMT6gvp7Jl+sVlHc0AqhMrp+7Ur5DkqCOfGHSYFf7jCJz6yWHl59eH9xm1VMKJbRgqSugjmM1ELAyto0MaFj7Og2G692BLTKIGqlvWFLmrGZ0UtLhmXeCDXvyx8zmsxhd+FcdZwkUqdcFtq6pFxBZtJzZ9II3jgDvQsuPTE8KKIMiVwWpNjMCxkzaAi+IpDRjmHkM6oIslUqyDKRM+Hw9jcvsIXB0gWZIysyiiK8Sbvsw13uGDfElMY9xYoVM2R5IXidbruyjkpWGe10quVkmDBvJNKkvJS76bkQ1jGdMy4l+4cv+DQ1ooISFJ+zIS8h8kbMC2TlmlIf06VNRqZVws54WsAX6A9JwersC6WOLUUowVCQWkq9DDnItSm5O243xutm8F+0t2rqKtwTpxMbbUI5jliSsHdNaQfHxyGMMX91HBDR0sOhGf1YRfeUGiq1C93lDLI7uKD06dsqeM7ls52d913YecReUs69RDRhiUf+c6FQNU9zLi2tnoVfrZhDNON9V5aFQFiXAnmBN6muBGX7655WlIp8VTuFWMVI1KFCRFjt9I7CUGYw6269I19lPEZrlJF0fPSrogWTz/Oo30bLoXzcMzpap5VcBduk5qH9tAqQCvzcWxdjKUoXIoSKfRejP3Xa8DkhU07IWnXX8ABrNads8gCv2jghrKR4aF4d+h39ccQFQCqssjqqoU02Pj9EV45WH7GSuIIMPLeC22oqEbgatjahrX2zu6m+Pppp7awzvNrujp9K9bnKAjRSqMM++JcaxsUcd3i5mjC2r3jwjq0r226KuqtopDziAjXAnQGEU2R+BWxDV+RkoHb/hmvwsmPxDnPA7yInIFOdW6RApEbXJWy2WSZe6yGGA/yO2ceDVtfNQV9zh5g3ucFksNTma0DJdWLjgHHktE+Lv1wlAQHPR1LMDIenz5+zJ4D9J6MXR7j9lWD9RQDZ8VD2bv679fX4ewbVAdgWOQMMyhZrx4GPetVQkx0SFkegIWkGDkzR8HhR4a9LY4cPGypuAtfp3EasjRPx6fP91Hg6nd7KiUKl0ttH4MQge5LaR6LEBzf+IxLiI/Hhz4Tqd7Hhz5BhZDSUNSZtrQCnwPHl/m7+Fnr8Zex4H1CHnvwBpO5m/AQbktCIYeMWTu6PWR9snRHunQasAFIlymNzqgwpnnRk9DSeAv8cHMXiKx1fPevhKk40NbYOHcbm07AHZm587UyqzWqhNKBWh6CnJ6evz9ibk8vzV2fTK5yA0s1Rrqegjmqj4eMwQL2jWrfwebyXFZdnV/+9ff/v/eoVuUCquwYcPljvq5OLi79PTr+jGJgoZzyNmj/Hn9e7ST+7BjlvTo0DqAJ7abDMhhiHyes2DVzrVaco0f/9wuyvgYrvWLKOG+er0V11+ipUVdIbu8IXDVSdQ5pN9AAMoE1TeXBlFbiyP7LZccdrgCSRwf+5l9zgmFqZcECGbVvfLaLEoaOfPk3sQv1xp50vOwPbLyrWBbPCTAA1C6G9DcfuzMckNqZN2GWgkTjJBIMRJxdG27YPO5CNANMFoVXa+vWVqjBhOJ7WcyP0VIDZRkocOvIaGi1ed0tCqGrI2PKcm7QA77ffa5p/b/lY80GJb556iAFLsw3g9nCi+YjFg/cg8Ov40oAzvtLKdvPQZZhyAhQFELGF9pjQFIZ+0yBrj1u2Pl6ILA62Plp2nq1HB+uD/wH6R1ds"
+    },
+    "{modelFileName}.js.tpl.merge": {
+      "17c0f1ae988d0df2763772a85174ff56426f1138": "eJxtUctuwyAQvOcrVpEibMWi6dWP9FD12h+wfKAxTpAIRgZHrhD/3sU0bqxmDyzs7AzD8jFZ2vJOKJ4Qx7T+ZFfu6bVvuaROhQPJwG0Ag0+WqzYH4r6Y4e+SGYPgDM3LqVedOOe/3SE6wWVrcqjdbqmFuDE5ckMjDBUk3ahOVvQKd3MtfRBZxPoBkhsbYOAWOXWTgWaDDfxIokZLYROSkTQDgeVDgamMXVRydbaXAvZ78Uw92hqgQ95MqEVzF8xJWjwloBOqR3NJHIRR5dDVB7Rlv/W8f23AP2H6zb8SCo2DCqlYgz5NVsN6kNv50moZxlJtI7g9rrh3U2T5x2iMuJA9Ae/qSaiWT1BVMJ36UVl4A0IAezLS+PIFL/jTbDbRPb7pB9azla0\u003d"
     }
   },
   "targets": {
@@ -74,10 +77,10 @@
       "parameters": {
         "appName": "webinosTV",
         "frameworkPath": "touch",
-        "appModels": "",
-        "appControllers": "",
-        "appStores": "",
-        "appViews": "Main"
+        "appModels": "AudioMedia,Category,Device,Media,VideoMedia",
+        "appControllers": "BrowserViewController,SelectCategoryController,SelectMediaController,SelectPlayModeController,SelectTargetDeviceController,largescreen.SelectSourceDeviceController,phone.SelectSourceDeviceController",
+        "appStores": "DeviceQueueMediaStore,DevicesStore,GenericMediaSubStore,MediaGroupStore,MediaStore",
+        "appViews": "ActionControlDataViewItem,ActionControlsColumn,AudioMPListItem,CategoriesColumn,ColumnView,CustomSegmentedButton,DefaultTilePanel,MPListItem,MediaCategoryDataViewItem,MediaPlaylist,MediaSelectionColumn,MediaWrapper,SourceDeviceDataViewItem,SourceDevicesColumn,SourceDevicesDataView,TargetDeviceDataViewItem,TargetDevicesColumn,TilesDataView,VideoMPListItem,largescreen.BrowserView,largescreen.DeviceQueueColumn,phone.BrowserView,phone.DeviceQueueColumn"
       }
     },
     "app.json": {
@@ -95,6 +98,61 @@
         "appStores": "",
         "appViews": "",
         "uniqueId": "77290ac4-fbbb-47a6-a76b-00764a6f4d15"
+      }
+    },
+    "app/model/Media.js": {
+      "source": "{modelFileName}.js.tpl.merge",
+      "version": "17c0f1ae988d0df2763772a85174ff56426f1138",
+      "parameters": {
+        "appName": "webinosTV",
+        "baseClass": "Ext.data.Model",
+        "modelFileName": "Media",
+        "name": "Media",
+        "fields": "id:string:null,title:string:null,file:string:null,meta:auto:null,type:string:null"
+      }
+    },
+    "app/model/AudioMedia.js": {
+      "source": "{modelFileName}.js.tpl.merge",
+      "version": "17c0f1ae988d0df2763772a85174ff56426f1138",
+      "parameters": {
+        "appName": "webinosTV",
+        "baseClass": "Media",
+        "modelFileName": "AudioMedia",
+        "name": "AudioMedia",
+        "fields": "artist:string:null,album:string:null"
+      }
+    },
+    "app/model/VideoMedia.js": {
+      "source": "{modelFileName}.js.tpl.merge",
+      "version": "17c0f1ae988d0df2763772a85174ff56426f1138",
+      "parameters": {
+        "appName": "webinosTV",
+        "baseClass": "webinosTV.model.Media",
+        "modelFileName": "VideoMedia",
+        "name": "VideoMedia",
+        "fields": "format:string:null,length:int:null"
+      }
+    },
+    "app/model/Device.js": {
+      "source": "{modelFileName}.js.tpl.merge",
+      "version": "17c0f1ae988d0df2763772a85174ff56426f1138",
+      "parameters": {
+        "appName": "webinosTV",
+        "baseClass": "Ext.data.Model",
+        "modelFileName": "Device",
+        "name": "Device",
+        "fields": "id:string:null,type:string:null,deviceName:string:null,queue:auto:null"
+      }
+    },
+    "app/model/Category.js": {
+      "source": "{modelFileName}.js.tpl.merge",
+      "version": "17c0f1ae988d0df2763772a85174ff56426f1138",
+      "parameters": {
+        "appName": "webinosTV",
+        "baseClass": "Ext.data.Model",
+        "modelFileName": "Category",
+        "name": "Category",
+        "fields": "id:string:null,category:string:null,mediaCategoryName:string:null"
       }
     }
   }
